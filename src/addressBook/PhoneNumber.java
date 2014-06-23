@@ -23,4 +23,23 @@ public class PhoneNumber {
 	public String toString() {
 		return phoneNum;
 	}
+	
+	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + phoneNum.hashCode();
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof PhoneNumber)) {
+			return false;
+		}
+		PhoneNumber pn = (PhoneNumber) o;
+		return pn.phoneNum.equals(phoneNum);
+	}
 }

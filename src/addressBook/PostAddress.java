@@ -65,7 +65,36 @@ public class PostAddress {
 	public String toString() {
 		String s = streetAddr1 + "\n" + streetAddr2 + "\n"
 				+ city + " " + state + " " + zip
-				+ " " + state;
+				+ " " + country;
 		return s;
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + streetAddr1.toLowerCase().hashCode();
+		result = 31 * result + streetAddr2.toLowerCase().hashCode();
+		result = 31 * result + city.toLowerCase().hashCode();
+		result = 31 * result + state.toLowerCase().hashCode();
+		result = 31 * result + country.toLowerCase().hashCode();
+		result = 31 * result + zip.toLowerCase().hashCode();
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof PostAddress)) {
+			return false;
+		}
+		PostAddress pa = (PostAddress) o;
+		return pa.streetAddr1.equalsIgnoreCase(streetAddr1) &&
+				pa.streetAddr2.equalsIgnoreCase(streetAddr2) &&
+				pa.city.equalsIgnoreCase(city) &&
+				pa.state.equalsIgnoreCase(state) &&
+				pa.country.equalsIgnoreCase(country)&&
+				pa.zip.equalsIgnoreCase(zip);
 	}
 }

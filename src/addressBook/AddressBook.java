@@ -21,7 +21,7 @@ public class AddressBook {
 		Iterator<Contact> it = addrBook.iterator();
 		while(it.hasNext()) {
 			Contact currCon = it.next();
-			if(currCon.getName().matches(".*" + name + ".*")){
+			if(currCon.getName().contains(name)){
 				int currConIndex = addrBook.indexOf(currCon);
 				result.add(currConIndex);
 			}
@@ -34,7 +34,7 @@ public class AddressBook {
 		Iterator<Contact> it = addrBook.iterator();
 		while(it.hasNext()) {
 			Contact currCon = it.next();
-			if(currCon.getPostAddr().matches(".*" + postAddr + ".*")){
+			if(currCon.getPostAddr().contains(postAddr)){
 				int currConIndex = addrBook.indexOf(currCon);
 				result.add(currConIndex);
 			}
@@ -47,7 +47,7 @@ public class AddressBook {
 		Iterator<Contact> it = addrBook.iterator();
 		while(it.hasNext()) {
 			Contact currCon = it.next();
-			if(currCon.getPhoneNum().matches(".*" + phoneNum + ".*")){
+			if(currCon.getPhoneNum().contains(phoneNum)){
 				int currConIndex = addrBook.indexOf(currCon);
 				result.add(currConIndex);
 			}
@@ -60,7 +60,7 @@ public class AddressBook {
 		Iterator<Contact> it = addrBook.iterator();
 		while(it.hasNext()) {
 			Contact currCon = it.next();
-			if(currCon.getEmailAddr().matches(".*" + emailAddr + ".*")){
+			if(currCon.getEmailAddr().contains(emailAddr)){
 				int currConIndex = addrBook.indexOf(currCon);
 				result.add(currConIndex);
 			}
@@ -73,7 +73,7 @@ public class AddressBook {
 		Iterator<Contact> it = addrBook.iterator();
 		while(it.hasNext()) {
 			Contact currCon = it.next();
-			if(currCon.getNote().matches(".*" + note + ".*")){
+			if(currCon.getNote().contains(note)){
 				int currConIndex = addrBook.indexOf(currCon);
 				result.add(currConIndex);
 			}
