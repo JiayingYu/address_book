@@ -1,27 +1,30 @@
 package addressBook;
 
 public class EmailAddress {
-	public final String userName;
-	public final String server;
+	public final String emailAddr;
 	
-	private EmailAddress(String userName, String server) {
-		if(userName.equals("") || server.equals("")) {
-			throw new IllegalArgumentException("user name or service address"
-					+ "can't be empty");
+	public EmailAddress(String emailAddr) {
+		if (validateEmail(emailAddr)) {
+			this.emailAddr = emailAddr;
 		}
-		this.userName = userName;
-		this.server =  server;
+		else {
+			throw new IllegalArgumentException("invalid emailAddress");
+		}
 	}
 	
+	private boolean validateEmail(String emailAddr) {
+		return emailAddr.matches("\\w+@\\w+\\.[a-zA-z]+");
+	}
+	
+	@Override
 	public String toString() {
-		return userName + "@" + server;
+		return emailAddr;
 	}
 	
 	@Override
 	public int hashCode() {
 		int result = 17;
-		result = 31 * result + userName.hashCode();
-		result = 31 * result + server.hashCode();
+		result = 31 * result + emailAddr.hashCode();
 		return result;
 	}
 	
@@ -34,7 +37,6 @@ public class EmailAddress {
 			return false;
 		}
 		EmailAddress email = (EmailAddress) o;
-		return email.userName.equals(userName) &&
-				email.server.equals(server);
+		return email.emailAddr.equals(emailAddr);
 	}
 }

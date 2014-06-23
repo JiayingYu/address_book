@@ -85,4 +85,13 @@ public class AddressBook {
 		addrBook.remove(index);
 	}
 
+	@Override
+	public String toString(){
+		String s = "";
+		Iterator<Contact> it = addrBook.iterator();
+		while(it.hasNext()) {
+			s += it.next().toString();
+		}
+		return s;
+	}
 }

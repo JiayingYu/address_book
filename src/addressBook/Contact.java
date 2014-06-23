@@ -93,4 +93,12 @@ public class Contact {
 	public String getNote() {
 		return note;
 	}
+	
+	@Override
+	public String toString() {
+		String s = name.toString() + "\n" + emailAddr.toString() + "\n"
+				+ phoneNum.toString() + "\n" + postAddr.toString() + "\n" 
+				+ note + "\n";
+		return s;
+	}
 }

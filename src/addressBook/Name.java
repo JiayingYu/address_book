@@ -13,8 +13,7 @@ public class Name {
 	}
 	
 	public String toString() {
-		return "First name: " + fName 
-				+ "\nLast name: " + lName;
+		return fName + " " + lName;
 	}
 	
 	@Override 

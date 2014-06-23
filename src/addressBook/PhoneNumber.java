@@ -12,12 +12,7 @@ public class PhoneNumber {
 	}
 	
 	private boolean isNumeric(String num){
-		try {
-			Integer.parseInt(num);
-			return true;
-		} catch(NumberFormatException e) {
-			return false;
-		}
+		return num.matches("\\d+");
 	}
 	
 	public String toString() {

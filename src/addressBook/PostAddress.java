@@ -63,8 +63,8 @@ public class PostAddress {
 	}
 
 	public String toString() {
-		String s = streetAddr1 + "\n" + streetAddr2 + "\n"
-				+ city + " " + state + " " + zip
+		String s = streetAddr1 + " " + streetAddr2 + "\n"
+				+ city + ", " + state + " " + zip
 				+ " " + country;
 		return s;
 	}
