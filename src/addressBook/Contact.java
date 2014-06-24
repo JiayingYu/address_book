@@ -1,5 +1,8 @@
 package addressBook;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class Contact {
 	private Name name;
 	private PostAddress postAddr;
@@ -52,6 +55,10 @@ public class Contact {
 		note = builder.note;
 	}
 	
+	private Contact() {
+		
+	}
+	
 	//setters
 	public void setName(Name name) {
 		this.name = name;
@@ -101,4 +108,47 @@ public class Contact {
 				+ note + "\n";
 		return s;
 	}
+	
+	static final String XML_TAG = "Contact";
+	
+	Element toXmlElement(Document doc) {
+		Element contactXml = doc.createElement(XML_TAG);
+		contactXml.appendChild(name.toXmlElement(doc));
+		if (postAddr != null) {
+			contactXml.appendChild(postAddr.toXmlElement(doc));
+		}
+		if (emailAddr != null) {
+			contactXml.appendChild(emailAddr.toXmlElement(doc));
+		}
+		if (phoneNum != null) {
+			contactXml.appendChild(phoneNum.toXmlElement(doc));
+		}
+		if ( note != null) {
+			Element noteXml = doc.createElement("Note");
+			noteXml.setTextContent(note);
+			contactXml.appendChild(noteXml);
+		}
+		return contactXml;
+	}
+	
+	static Contact fromXml(Element e) {
+		Name newName = Name.xmlToName((Element) e
+				.getElementsByTagName(Name.XML_TAG).item(0));
+		PostAddress newPostAddr = PostAddress.xmlToPostAddress((Element) e
+				.getElementsByTagName(PostAddress.XML_TAG).item(0));
+		EmailAddress newEmailAddr = EmailAddress.xmlToEmail((Element) e
+				.getElementsByTagName(EmailAddress.XML_TAG).item(0));
+		PhoneNumber newPhoneNum = PhoneNumber.xmlToPhoneNumber((Element) e
+				.getElementsByTagName(PhoneNumber.XML_TAG).item(0));
+		String newNote = e.getElementsByTagName("Note").item(0).getTextContent();
+		
+		Contact newContact = new Contact();
+		newContact.setName(newName);
+		newContact.setPostAddress(newPostAddr);
+		newContact.setEmailAddress(newEmailAddr);
+		newContact.setPhoneNumber(newPhoneNum);
+		newContact.setNote(newNote);
+		return newContact;
+	}
+		
 }

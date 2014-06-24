@@ -1,5 +1,8 @@
 package addressBook;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class Name {
 	public final String fName;
 	public final String lName;
@@ -35,6 +38,21 @@ public class Name {
 		Name name = (Name) o;
 		return name.fName.equalsIgnoreCase(fName) &&
 				name.lName.equalsIgnoreCase(lName);
+	}
+	
+	static final String XML_TAG = "Name";
+	
+	Element toXmlElement(Document doc) {
+		Element newElement = doc.createElement(XML_TAG);
+		newElement.setAttribute("FirstName", fName);
+		newElement.setAttribute("LastName", lName);
+		return newElement;
+	}
+	
+	static Name xmlToName(Element element) {
+		String fName = element.getAttribute("FirstName");
+		String lName = element.getAttribute("LastName");
+		return new Name(fName, lName);
 	}
 }
 

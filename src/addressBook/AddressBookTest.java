@@ -1,7 +1,18 @@
 package addressBook;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+
+import org.xml.sax.SAXException;
+
 public class AddressBookTest {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParserConfigurationException, 
+	TransformerFactoryConfigurationError, 
+	TransformerException, SAXException, IOException {
 		AddressBook addrBook = new AddressBook();
 		
 		Name name = new Name("Emily", "Zhang");
@@ -33,5 +44,9 @@ public class AddressBookTest {
 		addrBook.remove(1);
 		System.out.println();
 		System.out.println(addrBook.toString());
+		
+		addrBook.save("addressBook");
+		AddressBook newAddrBook = AddressBook.load("addressBook");
+		System.out.println(newAddrBook.toString());
 	}
 }

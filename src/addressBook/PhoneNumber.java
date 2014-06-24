@@ -1,5 +1,8 @@
 package addressBook;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class PhoneNumber {
 	private String phoneNum;
 	
@@ -36,5 +39,18 @@ public class PhoneNumber {
 		}
 		PhoneNumber pn = (PhoneNumber) o;
 		return pn.phoneNum.equals(phoneNum);
+	}
+	
+	static final String XML_TAG = "PhoneNumber";
+	
+	Element toXmlElement(Document doc) {
+		Element newElement = doc.createElement(XML_TAG);
+		newElement.setAttribute("Number", phoneNum);
+		return newElement;
+	}
+	
+	static PhoneNumber xmlToPhoneNumber(Element element) {
+		String phoneStr = element.getAttribute("Number");
+		return new PhoneNumber(phoneStr);
 	}
 }

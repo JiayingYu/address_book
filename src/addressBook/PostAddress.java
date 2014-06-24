@@ -1,5 +1,8 @@
 package addressBook;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class PostAddress {
 	private final String streetAddr1;
 	private final String streetAddr2;
@@ -96,5 +99,31 @@ public class PostAddress {
 				pa.state.equalsIgnoreCase(state) &&
 				pa.country.equalsIgnoreCase(country)&&
 				pa.zip.equalsIgnoreCase(zip);
+	}
+	
+	static final String XML_TAG = "PostAddress";
+	
+	Element toXmlElement(Document doc) {
+		Element newElement = doc.createElement(XML_TAG);
+		newElement.setAttribute("StreetAddress1", streetAddr1);
+		newElement.setAttribute("StreetAddress2", streetAddr2);
+		newElement.setAttribute("City", city);
+		newElement.setAttribute("State", state);
+		newElement.setAttribute("Country", country);
+		newElement.setAttribute("ZipCode", zip);
+		return newElement;
+	}
+	
+	static PostAddress xmlToPostAddress(Element element) {
+		String streetAddr1 = element.getAttribute("StreetAddress1");
+		String streetAddr2 = element.getAttribute("StreetAddress2");
+		String city = element.getAttribute("City");
+		String state = element.getAttribute("State");
+		String country = element.getAttribute("country");
+		String zip = element.getAttribute("ZipCode");
+		PostAddress postAddr = new PostAddress.Builder()
+		.streetAddr1(streetAddr1).streetAddr2(streetAddr2)
+		.city(city).state(state).country(country).zip(zip).build();
+		return postAddr;
 	}
 }

@@ -1,5 +1,8 @@
 package addressBook;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class EmailAddress {
 	public final String emailAddr;
 	
@@ -38,5 +41,18 @@ public class EmailAddress {
 		}
 		EmailAddress email = (EmailAddress) o;
 		return email.emailAddr.equals(emailAddr);
+	}
+	
+	static final String XML_TAG = "EmailAddress";
+	
+	Element toXmlElement(Document doc) {
+		Element newElement = doc.createElement(XML_TAG);
+		newElement.setAttribute("Address", emailAddr);
+		return newElement;
+	}
+	
+	static EmailAddress xmlToEmail(Element element) {
+		String emailStr = element.getAttribute("Address");
+		return new EmailAddress(emailStr);
 	}
 }
